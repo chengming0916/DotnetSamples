@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using NLog;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+=======
+﻿using Log2UI;
+using NLog;
+using NLog.Targets;
+using System;
+using System.Threading;
+using System.Windows;
+>>>>>>> develop
 
 namespace NLog2UI
 {
@@ -22,15 +31,48 @@ namespace NLog2UI
     /// </summary>
     public partial class MainWindow : Window
     {
+<<<<<<< HEAD
         private NLog.ILogger Logger = LogManager.GetCurrentClassLogger();
+=======
+        static MainWindow()
+        {
+            Target.Register<EventTarget>("event");
+        }
+
+        private NLog.ILogger Logger = LogManager.GetCurrentClassLogger();
+        private bool _isRunning;
+>>>>>>> develop
 
         public MainWindow()
         {
             InitializeComponent();
+<<<<<<< HEAD
+=======
+            this.Closed += (s, e) => _isRunning = false;
+            var targtes = Logger.Factory.Configuration.AllTargets;
+            foreach (var item in targtes)
+            {
+                if (item is EventTarget target)
+                {
+                    target.LogReceived += (s, e) =>
+                    {
+                        LogTextBox.Dispatcher.Invoke(() =>
+                        {
+                            LogTextBox.AppendText(e.Message);
+                        });
+                    };
+                }
+            }
+>>>>>>> develop
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
+=======
+            //NLog.Targets.Target target =
+
+>>>>>>> develop
             ThreadPool.QueueUserWorkItem(state =>
             {
                 while (true)
@@ -42,9 +84,32 @@ namespace NLog2UI
                     Logger.Error("nlog debug test");
                     Logger.Fatal("nlog debug test");
 
+<<<<<<< HEAD
                     Thread.Sleep(TimeSpan.FromMilliseconds(500));
                 }
             });
         }
     }
 }
+=======
+                    Thread.Sleep(TimeSpan.FromMilliseconds(5000));
+                }
+            });
+
+            _isRunning = true;
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                while (_isRunning)
+                {
+                    LogTextBox.Dispatcher.Invoke(() =>
+                    {
+                        LogTextBox.ScrollToEnd();
+                    });
+                    Thread.Sleep(500);
+                }
+            });
+        }
+
+    }
+}
+>>>>>>> develop

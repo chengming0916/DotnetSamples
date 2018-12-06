@@ -6,12 +6,18 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log2UI", "Log2UI\Log2UI.csproj", "{FC0DFECD-5393-49C0-9ECA-8787557836A2}"
 EndProject
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLog2UI", "NLog2UI\NLog2UI.csproj", "{4FF88A9C-A2D7-4810-B0DA-EF33210F147D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagnostics2File", "Diagnostics2File\Diagnostics2File.csproj", "{4200689F-47A4-4F43-87D7-E6C7F3697D50}"
 EndProject
+<<<<<<< HEAD
 >>>>>>> 900474040eb004a5e2de264ac39ddd76f027c316
+=======
+>>>>>>> develop
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,7 +29,10 @@ Global
 		{FC0DFECD-5393-49C0-9ECA-8787557836A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC0DFECD-5393-49C0-9ECA-8787557836A2}.Release|Any CPU.Build.0 = Release|Any CPU
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
 		{4FF88A9C-A2D7-4810-B0DA-EF33210F147D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4FF88A9C-A2D7-4810-B0DA-EF33210F147D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FF88A9C-A2D7-4810-B0DA-EF33210F147D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,7 +41,10 @@ Global
 		{4200689F-47A4-4F43-87D7-E6C7F3697D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4200689F-47A4-4F43-87D7-E6C7F3697D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4200689F-47A4-4F43-87D7-E6C7F3697D50}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 >>>>>>> 900474040eb004a5e2de264ac39ddd76f027c316
+=======
+>>>>>>> develop
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
