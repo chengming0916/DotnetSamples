@@ -8,9 +8,17 @@
         Loaded="Window_Loaded"
         Title="MainWindow" Height="450" Width="800">
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     <Grid>
         
     </Grid>
+=======
+    <RichTextBox x:Name="LogTextBox" IsReadOnly="True"/>
+>>>>>>> develop
+=======
+    <RichTextBox x:Name="LogTextBox" IsReadOnly="True"/>
+>>>>>>> develop
 =======
     <RichTextBox x:Name="LogTextBox" IsReadOnly="True"/>
 >>>>>>> develop

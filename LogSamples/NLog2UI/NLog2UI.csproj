@@ -71,6 +71,16 @@
       <SubType>Code</SubType>
     </Compile>
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <Compile Include="EventTarget.cs" />
+    <Compile Include="EventLogEventArgs.cs" />
+>>>>>>> develop
+=======
+    <Compile Include="EventTarget.cs" />
+    <Compile Include="EventLogEventArgs.cs" />
+>>>>>>> develop
 =======
     <Compile Include="EventTarget.cs" />
     <Compile Include="EventLogEventArgs.cs" />

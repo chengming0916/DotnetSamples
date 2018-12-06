@@ -1,4 +1,6 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 ﻿using NLog;
 using System;
 using System.Collections.Generic;
@@ -16,12 +18,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 =======
+=======
+>>>>>>> develop
+=======
+>>>>>>> develop
 ﻿using Log2UI;
 using NLog;
 using NLog.Targets;
 using System;
 using System.Threading;
 using System.Windows;
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
+>>>>>>> develop
+=======
 >>>>>>> develop
 
 namespace NLog2UI
@@ -32,8 +44,14 @@ namespace NLog2UI
     public partial class MainWindow : Window
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
         private NLog.ILogger Logger = LogManager.GetCurrentClassLogger();
 =======
+=======
+>>>>>>> develop
+=======
+>>>>>>> develop
         static MainWindow()
         {
             Target.Register<EventTarget>("event");
@@ -41,13 +59,25 @@ namespace NLog2UI
 
         private NLog.ILogger Logger = LogManager.GetCurrentClassLogger();
         private bool _isRunning;
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
+>>>>>>> develop
+=======
 >>>>>>> develop
 
         public MainWindow()
         {
             InitializeComponent();
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> develop
+=======
+>>>>>>> develop
             this.Closed += (s, e) => _isRunning = false;
             var targtes = Logger.Factory.Configuration.AllTargets;
             foreach (var item in targtes)
@@ -63,12 +93,28 @@ namespace NLog2UI
                     };
                 }
             }
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> develop
+=======
+>>>>>>> develop
+=======
 >>>>>>> develop
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            //NLog.Targets.Target target =
+
+>>>>>>> develop
+=======
+            //NLog.Targets.Target target =
+
+>>>>>>> develop
 =======
             //NLog.Targets.Target target =
 
@@ -85,6 +131,8 @@ namespace NLog2UI
                     Logger.Fatal("nlog debug test");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
                     Thread.Sleep(TimeSpan.FromMilliseconds(500));
                 }
             });
@@ -92,6 +140,10 @@ namespace NLog2UI
     }
 }
 =======
+=======
+>>>>>>> develop
+=======
+>>>>>>> develop
                     Thread.Sleep(TimeSpan.FromMilliseconds(5000));
                 }
             });
@@ -111,5 +163,13 @@ namespace NLog2UI
         }
 
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+}
+>>>>>>> develop
+=======
+}
+>>>>>>> develop
+=======
 }
 >>>>>>> develop
