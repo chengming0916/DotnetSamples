@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataValidate", "DataValidat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationRuleSample", "ValidationRuleSample\ValidationRuleSample.csproj", "{DD6767FA-6EA2-4ADF-A325-E5B48E587328}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataErrorInfoSample", "DataErrorInfoSample\DataErrorInfoSample.csproj", "{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{DD6767FA-6EA2-4ADF-A325-E5B48E587328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD6767FA-6EA2-4ADF-A325-E5B48E587328}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD6767FA-6EA2-4ADF-A325-E5B48E587328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DD6767FA-6EA2-4ADF-A325-E5B48E587328} = {0C85BA4D-7F1D-4899-BB37-F9B726D1F477}
+		{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4} = {0C85BA4D-7F1D-4899-BB37-F9B726D1F477}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A9ED77C-116F-4E5D-B892-D0EC10128D1E}
