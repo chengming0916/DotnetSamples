@@ -25,6 +25,9 @@ namespace DataErrorInfoSample
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+
+            Window1 w1 = new Window1();
+            w1.Show();
         }
     }
 
