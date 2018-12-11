@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,28 @@ namespace ValidateRule
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
+        }
+    }
+
+    public class MainWindowViewModel : INotifyPropertyChanged
+    {
+        private string _test;
+        public string Test
+        {
+            get { return _test; }
+            set
+            {
+                _test = value;
+                RaisePropertyChanged(nameof(Test));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
@@ -31,7 +54,11 @@ namespace ValidateRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            throw new NotImplementedException();
+            if (value == null) return new ValidationResult(false, "不能为空");
+
+            if (string.IsNullOrEmpty(value.ToString()))
+                return new ValidationResult(false, "不能为空字符串");
+            return new ValidationResult(true, null);
         }
     }
 }
