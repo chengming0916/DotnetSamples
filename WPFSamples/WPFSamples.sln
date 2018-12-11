@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSub", "EventAggregator\PubSub.csproj", "{7C8E5BCE-2A07-4B4B-AF39-C250FD741155}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataValidate", "DataValidate", "{0C85BA4D-7F1D-4899-BB37-F9B726D1F477}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationRuleSample", "ValidationRuleSample\ValidationRuleSample.csproj", "{DD6767FA-6EA2-4ADF-A325-E5B48E587328}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{7C8E5BCE-2A07-4B4B-AF39-C250FD741155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C8E5BCE-2A07-4B4B-AF39-C250FD741155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C8E5BCE-2A07-4B4B-AF39-C250FD741155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6767FA-6EA2-4ADF-A325-E5B48E587328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6767FA-6EA2-4ADF-A325-E5B48E587328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6767FA-6EA2-4ADF-A325-E5B48E587328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6767FA-6EA2-4ADF-A325-E5B48E587328}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD6767FA-6EA2-4ADF-A325-E5B48E587328} = {0C85BA4D-7F1D-4899-BB37-F9B726D1F477}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A9ED77C-116F-4E5D-B892-D0EC10128D1E}
