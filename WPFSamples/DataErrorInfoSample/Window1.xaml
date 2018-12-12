@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <TextBox Margin="5">
             <TextBox.Text>
-                <Binding Path="Test" ValidatesOnNotifyDataErrors="True"/>
+                <Binding Path="Test" ValidatesOnNotifyDataErrors="True" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
             <TextBox.Style>
                 <Style TargetType="{x:Type TextBox}">
@@ -46,6 +46,6 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Button Grid.Column="1" Content="Test" Margin="5" Padding="5" Command="{Binding TestCommand}"/>
+        <Button Grid.Column="1" Content="Test" Margin="5" Padding="5" Command="{Binding TestCommand,ValidatesOnNotifyDataErrors=False}"/>
     </Grid>
 </Window>

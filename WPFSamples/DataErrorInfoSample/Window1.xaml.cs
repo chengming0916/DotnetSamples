@@ -33,6 +33,8 @@ namespace DataErrorInfoSample
     {
         public Window1ViewModel()
         {
+            Test = string.Empty;
+
             this.TestCommand = new DelegateCommand(obj =>
             {
 
@@ -70,6 +72,10 @@ namespace DataErrorInfoSample
 
                     _test = value;
                     RaisePropertyChanged(nameof(Test));
+                    RaiseErrorChanged(nameof(Test));
+                    TestCommand?.RaiseCanExecuteChanged();
+                    //TestCommand.CanExecute(null);
+                    //CommandManager.AddCanExecuteHandler(this, TestCommand.CanExecuteChanged);
                 }
             }
         }
@@ -90,7 +96,7 @@ namespace DataErrorInfoSample
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        public ICommand TestCommand { get; private set; }
+        public DelegateCommand TestCommand { get; private set; }
     }
 
     /// <summary>
@@ -117,7 +123,7 @@ namespace DataErrorInfoSample
             if (canExecuteCache != temp)
             {
                 canExecuteCache = temp;
-                CanExecuteChanged?.Invoke(this, new EventArgs());
+                CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             }
 
             return canExecuteCache;
@@ -131,6 +137,11 @@ namespace DataErrorInfoSample
         }
 
         #endregion
-    }
 
+        public void RaiseCanExecuteChanged()
+        {
+            EventHandler handler = CanExecuteChanged;
+            handler?.Invoke(this, EventArgs.Empty);
+        }
+    }
 }
