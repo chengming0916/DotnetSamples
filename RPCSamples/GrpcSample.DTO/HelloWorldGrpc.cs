@@ -22,6 +22,27 @@ namespace GRPCDemo {
         __Marshaller_HelloRequest,
         __Marshaller_HelloReply);
 
+    static readonly grpc::Method<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply> __Method_ServerStreaming = new grpc::Method<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "ServerStreaming",
+        __Marshaller_HelloRequest,
+        __Marshaller_HelloReply);
+
+    static readonly grpc::Method<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply> __Method_ClientStreaming = new grpc::Method<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply>(
+        grpc::MethodType.ClientStreaming,
+        __ServiceName,
+        "ClientStreaming",
+        __Marshaller_HelloRequest,
+        __Marshaller_HelloReply);
+
+    static readonly grpc::Method<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply> __Method_BidirectionalStreaming = new grpc::Method<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply>(
+        grpc::MethodType.DuplexStreaming,
+        __ServiceName,
+        "BidirectionalStreaming",
+        __Marshaller_HelloRequest,
+        __Marshaller_HelloReply);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -32,6 +53,21 @@ namespace GRPCDemo {
     public abstract partial class gRPCBase
     {
       public virtual global::System.Threading.Tasks.Task<global::GRPCDemo.HelloReply> SayHello(global::GRPCDemo.HelloRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task ServerStreaming(global::GRPCDemo.HelloRequest request, grpc::IServerStreamWriter<global::GRPCDemo.HelloReply> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::GRPCDemo.HelloReply> ClientStreaming(grpc::IAsyncStreamReader<global::GRPCDemo.HelloRequest> requestStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task BidirectionalStreaming(grpc::IAsyncStreamReader<global::GRPCDemo.HelloRequest> requestStream, grpc::IServerStreamWriter<global::GRPCDemo.HelloReply> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -77,6 +113,30 @@ namespace GRPCDemo {
       {
         return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
       }
+      public virtual grpc::AsyncServerStreamingCall<global::GRPCDemo.HelloReply> ServerStreaming(global::GRPCDemo.HelloRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ServerStreaming(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::GRPCDemo.HelloReply> ServerStreaming(global::GRPCDemo.HelloRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_ServerStreaming, null, options, request);
+      }
+      public virtual grpc::AsyncClientStreamingCall<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply> ClientStreaming(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ClientStreaming(new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncClientStreamingCall<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply> ClientStreaming(grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncClientStreamingCall(__Method_ClientStreaming, null, options);
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply> BidirectionalStreaming(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return BidirectionalStreaming(new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncDuplexStreamingCall<global::GRPCDemo.HelloRequest, global::GRPCDemo.HelloReply> BidirectionalStreaming(grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncDuplexStreamingCall(__Method_BidirectionalStreaming, null, options);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override gRPCClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -89,7 +149,10 @@ namespace GRPCDemo {
     public static grpc::ServerServiceDefinition BindService(gRPCBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
+          .AddMethod(__Method_ServerStreaming, serviceImpl.ServerStreaming)
+          .AddMethod(__Method_ClientStreaming, serviceImpl.ClientStreaming)
+          .AddMethod(__Method_BidirectionalStreaming, serviceImpl.BidirectionalStreaming).Build();
     }
 
   }

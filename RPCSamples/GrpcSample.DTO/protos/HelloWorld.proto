@@ -2,6 +2,12 @@
 package gRPCDemo;
 service gRPC {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+
+  rpc ServerStreaming (HelloRequest) returns (stream HelloReply) {}
+
+  rpc ClientStreaming (stream HelloRequest) returns (HelloReply) {}
+
+  rpc BidirectionalStreaming (stream HelloRequest) returns (stream HelloReply) {}
 }
 
 message HelloRequest {
