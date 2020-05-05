@@ -32,44 +32,46 @@ namespace GrpcSample.Client
                 }
             });
 
-            //var reply2 = client.ClientStreaming();
-            //Task.Run(async () =>
-            //{
-            //    while (true)
-            //    {
-            //        await reply2.RequestStream.WriteAsync(new HelloRequest
-            //        {
-            //            Name = "client streaming request:" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff")
-            //        });
-            //        Thread.Sleep(TimeSpan.FromSeconds(2));
-            //    }
-            //    //关闭流
-            //    //await reply2.RequestStream.CompleteAsync();
-            //});
+            var reply2 = client.ClientStreaming();
+            Task.Run(async () =>
+            {
+                while (true)
+                {
+                    await reply2.RequestStream.WriteAsync(new HelloRequest
+                    {
+                        Name = "client streaming request:" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff")
+                    });
+                    Thread.Sleep(TimeSpan.FromSeconds(2));
+                }
+                //关闭流
+                //await reply2.RequestStream.CompleteAsync();
+            });
 
-            //var reply3 = client.BidirectionalStreaming();
-            //Task.Run(async () =>
-            //{
-            //    while (await reply3.ResponseStream.MoveNext())
-            //    {
-            //        var r = reply3.ResponseStream.Current;
-            //        Console.WriteLine("receive:" + r.Message);
-            //    }
-            //});
+            var reply3 = client.BidirectionalStreaming();
+            Task.Run(async () =>
+            {
+                while (await reply3.ResponseStream.MoveNext())
+                {
+                    var r = reply3.ResponseStream.Current;
+                    Console.WriteLine("receive:" + r.Message);
+                }
+            });
 
-            //Task.Run(async () =>
-            //{
-            //    while (true)
-            //    {
-            //        await reply3.RequestStream.WriteAsync(new HelloRequest
-            //        {
-            //            Name = "bidirect request:" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff")
-            //        });
+            Task.Run(async () =>
+            {
+                while (true)
+                {
+                    await reply3.RequestStream.WriteAsync(new HelloRequest
+                    {
+                        Name = "bidirect request:" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff")
+                    });
 
-            //        Thread.Sleep(TimeSpan.FromSeconds(3));
-            //    }
-            //});
-            //await reply3.RequestStream.CompleteAsync();
+                    Thread.Sleep(TimeSpan.FromSeconds(3));
+                }
+                //关闭流
+                //await reply3.RequestStream.CompleteAsync();
+            });
+
 
             //channel.ShutdownAsync().Wait();
             Console.WriteLine("任意键退出...");
