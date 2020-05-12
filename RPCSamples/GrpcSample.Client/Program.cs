@@ -16,7 +16,7 @@ namespace GrpcSample.Client
             var client = new gRPC.gRPCClient(channel);
             var reply = client.SayHello(new HelloRequest { Name = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff") });
             Console.WriteLine("来自" + reply.Message);
-
+            
             //服务端流
             var reply1 = client.ServerStreaming(new HelloRequest
             {
@@ -43,8 +43,7 @@ namespace GrpcSample.Client
                     });
                     Thread.Sleep(TimeSpan.FromSeconds(2));
                 }
-                //关闭流
-                //await reply2.RequestStream.CompleteAsync();
+
             });
 
             var reply3 = client.BidirectionalStreaming();
@@ -68,14 +67,19 @@ namespace GrpcSample.Client
 
                     Thread.Sleep(TimeSpan.FromSeconds(3));
                 }
-                //关闭流
-                //await reply3.RequestStream.CompleteAsync();
+
             });
 
 
             //channel.ShutdownAsync().Wait();
             Console.WriteLine("任意键退出...");
             Console.ReadKey();
+            //关闭流
+            Task.Run(async () =>
+            {
+                await reply2.RequestStream.CompleteAsync();
+                await reply3.RequestStream.CompleteAsync();
+            });
         }
     }
 }
