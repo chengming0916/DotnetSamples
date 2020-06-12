@@ -48,6 +48,8 @@ namespace SelfHost
             container.RegisterType<DbContext, ApplicationDbContext>();
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
             container.RegisterType<ApplicationUserManager>();
+            container.RegisterType<IRoleStore<IdentityRole, string>, RoleStore<IdentityRole>>();
+            container.RegisterType<RoleManager<IdentityRole>>();
         }
     }
 }
