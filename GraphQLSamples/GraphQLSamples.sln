@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Dotnet 4.6", "1. Dotnet 4.6", "{DB41D8C0-5178-439D-BC40-9636E0FA7733}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{AA803ECD-6BF5-42E9-B5BA-B9D2AC1F4C96}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLSample", "GraphQLSample\GraphQLSample.csproj", "{11F729D4-03B6-47A0-B925-9A8E258FBB70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11F729D4-03B6-47A0-B925-9A8E258FBB70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F729D4-03B6-47A0-B925-9A8E258FBB70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F729D4-03B6-47A0-B925-9A8E258FBB70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F729D4-03B6-47A0-B925-9A8E258FBB70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{11F729D4-03B6-47A0-B925-9A8E258FBB70} = {DB41D8C0-5178-439D-BC40-9636E0FA7733}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DB212F7-1805-471B-8193-19FD78343F64}
+	EndGlobalSection
+EndGlobal
