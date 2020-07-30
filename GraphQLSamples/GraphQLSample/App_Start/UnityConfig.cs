@@ -1,3 +1,5 @@
+using GraphQL;
+using GraphQL.Http;
 using System;
 
 using Unity;
@@ -42,6 +44,9 @@ namespace GraphQLSample
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
+
+            container.RegisterSingleton<IDocumentExecuter, DocumentExecuter>();
+            container.RegisterSingleton<IDocumentWriter, DocumentWriter>();
         }
     }
 }
