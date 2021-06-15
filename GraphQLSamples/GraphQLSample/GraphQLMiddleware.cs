@@ -24,12 +24,14 @@ namespace GraphQLSample
         private readonly ISchema _schema;
         private readonly GraphQLSettings _settings;
 
-        public GraphQLMiddleware(OwinMiddleware next)
+        public GraphQLMiddleware(OwinMiddleware next, IDocumentWriter writer,
+            IDocumentExecuter executer, ISchema schema, GraphQLSettings settings)
             : base(next)
         {
-            _writer = UnityConfig.Container.Resolve<IDocumentWriter>();
-            _executer = UnityConfig.Container.Resolve<IDocumentExecuter>();
-            _schema = UnityConfig.Container.Resolve<ISchema>();
+            _writer = writer;
+            _executer = executer;
+            _schema = schema;
+            _settings = settings;
         }
 
         public override async Task Invoke(IOwinContext context)
