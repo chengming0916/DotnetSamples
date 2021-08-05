@@ -13,13 +13,18 @@ namespace DotNettySamples.Server
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task Main(string[] args) => RunServerAsync().Wait();
+
+        static async Task RunServerAsync()
         {
-            IEventLoopGroup eventLoopGroup = new MultithreadEventLoopGroup();
-            var bootstrap = new Bootstrap();
+            IEventLoopGroup bossGroup = new MultithreadEventLoopGroup(1);
+            IEventLoopGroup udpWorkerGroup = new MultithreadEventLoopGroup();
+            IEventLoopGroup tcpWorkerGroup = new MultithreadEventLoopGroup();
+            var udpBootstrap = new Bootstrap();
+            var tcpBootstrap = new ServerBootstrap();
             try
             {
-                bootstrap.Group(eventLoopGroup)
+                udpBootstrap.Group(udpWorkerGroup)
                     .Channel<SocketDatagramChannel>()
                     .Option(ChannelOption.SoBroadcast, true)
                     .Option(ChannelOption.SoReuseaddr, true)
@@ -28,26 +33,18 @@ namespace DotNettySamples.Server
                         channel.Pipeline.AddLast("Udp", new UdpServerHandler());
                     }));
 
-                //bootstrap.Group(eventLoopGroup);
-                //bootstrap.Channel<TcpServerSocketChannel>()
-                //    .ChildOption(ChannelOption.SoKeepalive, true);
-                //bootstrap.ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
-                //{
-                //    IChannelPipeline pipeline = channel.Pipeline;
-                //    pipeline.AddLast(new EchoServerHandler());
-                //}));
+                tcpBootstrap.Group(bossGroup, tcpWorkerGroup);
+                tcpBootstrap.Channel<TcpServerSocketChannel>()
+                    .ChildOption(ChannelOption.SoKeepalive, true);
+                tcpBootstrap.ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
+                {
+                    IChannelPipeline pipeline = channel.Pipeline;
+                    pipeline.AddLast(new EchoServerHandler());
+                    //pipeline.AddLast(new NumberEncoder(), new BigIntegerDecoder(), new FactorialServerHandler());
+                }));
 
-                //bootstrap.Channel<SocketDatagramChannel>()
-                //    .Option(ChannelOption.SoBroadcast, true)
-                //    .Option(ChannelOption.SoReuseaddr, true);
-                //bootstrap.Handler(new ActionChannelInitializer<IChannel>(channel =>
-                //{
-                //    IChannelPipeline pipeline = channel.Pipeline;
-                //    pipeline.AddLast(new LoggingHandler());
-                //    pipeline.AddLast(new UdpServerHandler());
-                //}));
-
-                IChannel boundChannel = await bootstrap.BindAsync(8002);
+                IChannel tcpChannel = await tcpBootstrap.BindAsync(8002);
+                IChannel udpChannel = await udpBootstrap.BindAsync(8002);
                 while (true)
                 {
                     if (Console.ReadKey().Key == ConsoleKey.Escape)
@@ -63,7 +60,9 @@ namespace DotNettySamples.Server
             }
             finally
             {
-                await eventLoopGroup.ShutdownGracefullyAsync();
+                await bossGroup.ShutdownGracefullyAsync();
+                await tcpWorkerGroup.ShutdownGracefullyAsync();
+                await udpWorkerGroup.ShutdownGracefullyAsync();
             }
         }
     }
