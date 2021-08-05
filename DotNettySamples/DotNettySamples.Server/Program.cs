@@ -30,7 +30,7 @@ namespace DotNettySamples.Server
                     .Option(ChannelOption.SoReuseaddr, true)
                     .Handler(new ActionChannelInitializer<IChannel>(channel =>
                     {
-                        channel.Pipeline.AddLast("Udp", new UdpServerHandler());
+                        channel.Pipeline.AddLast("UDP", new UdpServerHandler());
                     }));
 
                 tcpBootstrap.Group(bossGroup, tcpWorkerGroup);
@@ -39,7 +39,7 @@ namespace DotNettySamples.Server
                 tcpBootstrap.ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
                 {
                     IChannelPipeline pipeline = channel.Pipeline;
-                    pipeline.AddLast(new EchoServerHandler());
+                    pipeline.AddLast("TCP", new TcpServerHandler());
                     //pipeline.AddLast(new NumberEncoder(), new BigIntegerDecoder(), new FactorialServerHandler());
                 }));
 
@@ -52,7 +52,8 @@ namespace DotNettySamples.Server
                         break;
                     }
                 }
-
+                await tcpChannel.CloseAsync();
+                await udpChannel.CloseAsync();
             }
             catch (Exception ex)
             {
@@ -60,9 +61,11 @@ namespace DotNettySamples.Server
             }
             finally
             {
-                await bossGroup.ShutdownGracefullyAsync();
-                await tcpWorkerGroup.ShutdownGracefullyAsync();
-                await udpWorkerGroup.ShutdownGracefullyAsync();
+                await Task.WhenAll(
+                 bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                 tcpWorkerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                 udpWorkerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1))
+                );
             }
         }
     }

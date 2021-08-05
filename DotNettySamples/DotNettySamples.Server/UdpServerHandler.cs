@@ -19,7 +19,7 @@ namespace DotNettySamples.Server
 
             string message = msg.Content.ToString(Encoding.UTF8);
 
-            Console.WriteLine($"Server Receive Udp message => {message}");
+            Console.WriteLine($"Server received udp message => {message}");
 
             byte[] bytes = Encoding.UTF8.GetBytes("Hello client" + DateTime.Now.Ticks);
 
@@ -30,11 +30,7 @@ namespace DotNettySamples.Server
             //ctx.CloseAsync();
         }
 
-        public override void ChannelReadComplete(IChannelHandlerContext context)
-        {
-            //base.ChannelReadComplete(context);
-            context.Flush();
-        }
+        public override void ChannelReadComplete(IChannelHandlerContext context) => context.Flush();
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
