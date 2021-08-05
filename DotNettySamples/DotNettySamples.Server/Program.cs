@@ -13,7 +13,7 @@ namespace DotNettySamples.Server
 {
     class Program
     {
-        static async Task Main(string[] args) => RunServerAsync().Wait();
+        static void Main(string[] args) => RunServerAsync().Wait();
 
         static async Task RunServerAsync()
         {

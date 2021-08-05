@@ -19,7 +19,7 @@ namespace DotNettySamples.Server
 
             string message = msg.Content.ToString(Encoding.UTF8);
 
-            Console.WriteLine($"Server Received => {message}");
+            Console.WriteLine($"Server Receive Udp message => {message}");
 
             byte[] bytes = Encoding.UTF8.GetBytes("Hello client" + DateTime.Now.Ticks);
 

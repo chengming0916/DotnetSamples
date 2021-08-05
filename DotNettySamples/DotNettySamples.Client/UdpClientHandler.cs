@@ -13,7 +13,7 @@ namespace DotNettySamples.Client
 
             string message = msg.Content.ToString(Encoding.UTF8);
 
-            Console.WriteLine($"Client Receive => {message}");
+            Console.WriteLine($"Client Receive Udp message => {message}");
 
             //ctx.CloseAsync();
         }
