@@ -37,14 +37,24 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Thrift">
-      <HintPath>..\lib\Thrift.dll</HintPath>
+    <Reference Include="Thrift, Version=0.12.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ApacheThrift.0.12.0.1\lib\net35\Thrift.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Thirft\Thrift\Sample\DTO\Blog.cs" />
+    <Compile Include="Thirft\Thrift\Sample\DTO\ThriftCase.cs" />
     <Compile Include="ThriftCase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Thirft\textCsharp.thrift" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Thirft\thrift-0.12.0.exe" />
+    <Content Include="Thirft\生成指令.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
