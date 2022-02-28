@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="BuildClientProto" BeforeTargets="Build">
+    <PropertyGroup>
+      <ProtocPath>.\packages\Grpc.Tools.2.44.0\tools\windows_x64\protoc.exe</ProtocPath>
+      <PluginPath>.\packages\Grpc.Tools.2.44.0\tools\windows_x64\grpc_csharp_plugin.exe</PluginPath>
+      <OutDir>.\GrpcSample.Client\Grpc\</OutDir>
+    </PropertyGroup>
+    <Exec WorkingDirectory=".." Command="$(ProtocPath) --csharp_out $(OutDir) --grpc_out $(OutDir) --grpc_opt=no_server --plugin=protoc-gen-grpc=$(PluginPath) .\GrpcSample.DTO\protos\*.proto" />
+  </Target>
+</Project>
