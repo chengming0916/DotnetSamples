@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubSub", "EventAggregator\PubSub.csproj", "{7C8E5BCE-2A07-4B4B-AF39-C250FD741155}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataErrorInfoSample", "DataErrorInfoSample\DataErrorInfoSample.csproj", "{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControlValidator", "CustomControlValidator\CustomControlValidator.csproj", "{80B30A14-5651-4A10-8867-9BB158EAE061}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CloseWindow", "CloseWindow", "{E1C48F5C-7DC4-4122-A226-98F8D5510B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloseWindowSample", "CloseWindowSample\CloseWindowSample.csproj", "{0F9EBE27-8D2D-4519-92A6-30373F09F00D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,10 @@ Global
 		{80B30A14-5651-4A10-8867-9BB158EAE061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B30A14-5651-4A10-8867-9BB158EAE061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B30A14-5651-4A10-8867-9BB158EAE061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F9EBE27-8D2D-4519-92A6-30373F09F00D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F9EBE27-8D2D-4519-92A6-30373F09F00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F9EBE27-8D2D-4519-92A6-30373F09F00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F9EBE27-8D2D-4519-92A6-30373F09F00D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +51,7 @@ Global
 		{DD6767FA-6EA2-4ADF-A325-E5B48E587328} = {0C85BA4D-7F1D-4899-BB37-F9B726D1F477}
 		{6D8DAB2B-F74F-4B1C-ADB0-599FA68BDBD4} = {0C85BA4D-7F1D-4899-BB37-F9B726D1F477}
 		{80B30A14-5651-4A10-8867-9BB158EAE061} = {0C85BA4D-7F1D-4899-BB37-F9B726D1F477}
+		{0F9EBE27-8D2D-4519-92A6-30373F09F00D} = {E1C48F5C-7DC4-4122-A226-98F8D5510B78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A9ED77C-116F-4E5D-B892-D0EC10128D1E}
