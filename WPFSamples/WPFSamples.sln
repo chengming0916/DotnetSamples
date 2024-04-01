@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CloseWindow", "CloseWindow"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloseWindowSample", "CloseWindowSample\CloseWindowSample.csproj", "{0F9EBE27-8D2D-4519-92A6-30373F09F00D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontAwesome", "FontAwesome\FontAwesome.csproj", "{C4D390B3-D039-4DD9-A8CA-CD6380BEC4BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{0F9EBE27-8D2D-4519-92A6-30373F09F00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F9EBE27-8D2D-4519-92A6-30373F09F00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F9EBE27-8D2D-4519-92A6-30373F09F00D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D390B3-D039-4DD9-A8CA-CD6380BEC4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D390B3-D039-4DD9-A8CA-CD6380BEC4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D390B3-D039-4DD9-A8CA-CD6380BEC4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D390B3-D039-4DD9-A8CA-CD6380BEC4BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
