@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThriftSample", "ThriftSample", "{4E6AF8FB-7237-450F-B41D-F93E13597E23}"
 EndProject
@@ -18,6 +18,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcSample.Client", "GrpcSample.Client\GrpcSample.Client.csproj", "{EBA588D9-C8B1-4DA9-8BCC-F1A93CF23AB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcSample.Server", "GrpcSample.Server\GrpcSample.Server.csproj", "{22B8CBBC-3FE1-4077-8683-8C23574DC6F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JwtSample", "JwtSample", "{B0AE8C0D-238C-4D9A-A05D-D0C9BF1FD290}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtSample.Server", "JwtSample.Server\JwtSample.Server.csproj", "{410E5065-9D2A-4EBA-AB6B-C893808C301F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtSample.Client", "JwtSample.Client\JwtSample.Client.csproj", "{3DA6922E-309B-41F2-91C3-BE31BA5D079B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{22B8CBBC-3FE1-4077-8683-8C23574DC6F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22B8CBBC-3FE1-4077-8683-8C23574DC6F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22B8CBBC-3FE1-4077-8683-8C23574DC6F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{410E5065-9D2A-4EBA-AB6B-C893808C301F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{410E5065-9D2A-4EBA-AB6B-C893808C301F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{410E5065-9D2A-4EBA-AB6B-C893808C301F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{410E5065-9D2A-4EBA-AB6B-C893808C301F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA6922E-309B-41F2-91C3-BE31BA5D079B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA6922E-309B-41F2-91C3-BE31BA5D079B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA6922E-309B-41F2-91C3-BE31BA5D079B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA6922E-309B-41F2-91C3-BE31BA5D079B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +74,8 @@ Global
 		{B548ACE7-850A-4FB2-8E4F-9D0722E22499} = {EC69D209-6C11-444D-AC0A-10055FD7C927}
 		{EBA588D9-C8B1-4DA9-8BCC-F1A93CF23AB2} = {EC69D209-6C11-444D-AC0A-10055FD7C927}
 		{22B8CBBC-3FE1-4077-8683-8C23574DC6F4} = {EC69D209-6C11-444D-AC0A-10055FD7C927}
+		{410E5065-9D2A-4EBA-AB6B-C893808C301F} = {B0AE8C0D-238C-4D9A-A05D-D0C9BF1FD290}
+		{3DA6922E-309B-41F2-91C3-BE31BA5D079B} = {B0AE8C0D-238C-4D9A-A05D-D0C9BF1FD290}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F06A5E8E-B640-40A6-85A9-38A3F62B9EB7}
