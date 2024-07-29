@@ -29,35 +29,36 @@ namespace JwtSample.Server
             //    });
             //});
 
-            //builder.Services
-            //    .AddAuthentication(options =>
-            //    {
-            //        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    })
-            //    .AddJwtBearer(options =>
-            //    {
-            //        var jwtOptions = builder.Configuration.GetSection("Jwt").Get<JwtOption>();
+            builder.Services.AddAuthorization();
 
-            //        options.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateAudience = false,
-            //            ValidateIssuer = false,
-            //            //ValidateActor = false,
-            //            ValidAudience = jwtOptions.ValidAudience,
-            //            ValidIssuer = jwtOptions.ValidIssuer,
-            //            ValidateLifetime = true,
-            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret))
-            //        };
-            //    });
+            builder.Services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        //ValidateActor = false,
+                        ValidAudience = "Sample",
+                        ValidIssuer = "Jwt",
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes("1BDAB263-86EF-45C5-884E-95CB6BF63134"))
+                    };
+                });
 
             var app = builder.Build();
 
             app.UseRouting();
 
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             // Configure the HTTP request pipeline.
             app.MapGrpcService<GreeterService>();

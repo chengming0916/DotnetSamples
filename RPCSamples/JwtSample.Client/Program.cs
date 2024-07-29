@@ -12,6 +12,19 @@ namespace JwtSample.Client
             var reply = client.GetToken(new GetTokenRequest() { Account = "admin", Password = "admin" });
             Console.WriteLine($"Token: {reply.Token}");
 
+            var headers = new Metadata();
+            headers.Add("Authorization", $"Bearer {reply.Token}");
+            var reply1 = client.SayHello(new HelloRequest { }, headers);
+
+            try
+            {
+                var reply2 = client.SayHello(new HelloRequest());
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             Console.ReadKey();
         }
     }

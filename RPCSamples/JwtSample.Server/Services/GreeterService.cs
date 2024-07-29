@@ -11,7 +11,7 @@ using System.Text;
 
 namespace JwtSample.Server.Services
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class GreeterService : Greeter.GreeterBase
     {
         private readonly ILogger<GreeterService> m_logger;
@@ -72,7 +72,7 @@ namespace JwtSample.Server.Services
             }
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public override async Task<GetTokenReply> GetToken(GetTokenRequest request, ServerCallContext context)
         {
             //return base.GetToken(request, context);
@@ -92,12 +92,13 @@ namespace JwtSample.Server.Services
         {
             if (string.IsNullOrEmpty(name))
                 throw new InvalidOperationException("Name is not specified.");
-            //var claims = new[] { new Claim(ClaimTypes.Name, name) };
-            //var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256Signature);
-            //var token = new JwtSecurityToken("JwtSample.Server", "JwtSample", claims,
-            //    expires: DateTime.Now.AddSeconds(60), signingCredentials: credentials);
+            var claims = new[] { new Claim(ClaimTypes.Name, name) };
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1BDAB263-86EF-45C5-884E-95CB6BF63134"));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+            var token = new JwtSecurityToken("JwtSample.Server", "JwtSample", claims,
+               expires: DateTime.Now.AddSeconds(60), signingCredentials: credentials);
 
-            return string.Empty;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
