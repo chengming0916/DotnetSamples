@@ -33,7 +33,6 @@ namespace DotNettySamples.Server
         //    context.WriteAsync(buffer);
         //}
 
-		// 消息读完一定要清空，否则会导致粘包
         public override void ChannelReadComplete(IChannelHandlerContext context) => context.Flush();
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
