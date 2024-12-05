@@ -1,117 +1,60 @@
 ﻿using DotNetty.Buffers;
+using DotNetty.Common.Internal.Logging;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NLog.Extensions.Logging;
+using System.Runtime.InteropServices;
 
 namespace DotNettySamples.Client
 {
-    class Program
+    internal class Program
     {
-        static async Task RunTcpClientAsync()
+        private static void Main(string[] args)
         {
-            var eventLoopGroup = new MultithreadEventLoopGroup();
-            var bootstrap = new Bootstrap();
-            try
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            // 设置程序运行主目录
+            Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
+            var builder = Host.CreateDefaultBuilder(args);
+
+            //Initialize logger
+            var loggingBuilder = new Action<ILoggingBuilder>(cfg =>
             {
-                bootstrap.Group(eventLoopGroup)
-                .Channel<TcpSocketChannel>()
-                .Option(ChannelOption.TcpNodelay, true)
-                .Handler(new ActionChannelInitializer<ISocketChannel>(channel =>
-                {
-                    IChannelPipeline pipeline = channel.Pipeline;
-                    pipeline.AddLast("TCP", new TcpClientHandler());
-                }));
+                cfg.ClearProviders();
+                cfg.AddNLog();
+            });
+            InternalLoggerFactory.DefaultFactory = LoggerFactory.Create(loggingBuilder);
+            builder.ConfigureLogging(loggingBuilder);
 
-                var remoteEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8002);
-                IChannel clientChannel = await bootstrap.ConnectAsync(remoteEndPoint);
+            //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            //    builder.UseWindowsService();
+            //if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            //    builder.UseSystemd();
 
-                ThreadPool.QueueUserWorkItem(callback =>
-                {
-                    while (true)
-                    {
-                        byte[] bytes = Encoding.UTF8.GetBytes("Hello server" + DateTime.Now.Ticks);
-                        IByteBuffer buffer = Unpooled.WrappedBuffer(bytes);
-                        clientChannel.WriteAndFlushAsync(buffer);
-                        Thread.Sleep(200);
-                    }
-                });
-
-                //while (true)
-                //{
-                //    if (Console.ReadKey().Key == ConsoleKey.Escape)
-                //        break;
-                //}
-
-                //await clientChannel.CloseAsync();
-            }
-            finally
+            builder.ConfigureServices((ctx, svc) =>
             {
-                //await clientChannel.CloseAsync();
-                //await eventLoopGroup.ShutdownGracefullyAsync();
-            }
-        }
+                svc.AddHostedService<Worker>();
 
-        static async Task RunUdpClientAsync()
-        {
-            var eventLoopGroup = new MultithreadEventLoopGroup();
-            var bootstrap = new Bootstrap();
+                svc.AddSingleton<Config>();
+                svc.Configure<Config>(ctx.Configuration.GetSection("Config"));
+            });
 
-            bootstrap.Group(eventLoopGroup)
-                .Channel<SocketDatagramChannel>()
-                .Option(ChannelOption.SoBroadcast, true)
-                .Option(ChannelOption.SoReuseaddr, true).
-                Handler(new ActionChannelInitializer<IChannel>(channel =>
-                {
-                    channel.Pipeline.AddLast("UDP", new UdpClientHandler());
-                }));
+            var app = builder.Build();
 
-
-            var remoteEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8002);
-            IChannel clientChannel = await bootstrap.BindAsync(IPEndPoint.MinPort);
-            try
-            {
-                ThreadPool.QueueUserWorkItem(callback =>
-                {
-                    while (true)
-                    {
-                        byte[] bytes = Encoding.UTF8.GetBytes("Hello server" + DateTime.Now.Ticks);
-                        IByteBuffer buffer = Unpooled.WrappedBuffer(bytes);
-                        clientChannel.WriteAndFlushAsync(new DatagramPacket(buffer, remoteEndPoint));
-                        Thread.Sleep(200);
-                    }
-                });
-
-                //while (true)
-                //{
-                //    if (Console.ReadKey().Key == ConsoleKey.Escape)
-                //        break;
-                //}
-                //await clientChannel.CloseAsync();
-            }
-            finally
-            {
-                //await clientChannel.CloseAsync();
-                //await eventLoopGroup.ShutdownGracefullyAsync();
-            }
-        }
-
-        static void Main(string[] args)
-        {
-            Task.Run(RunUdpClientAsync);
-            Task.Run(RunTcpClientAsync);
-
-            while (true)
-            {
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
-                    break;
-            }
+            app.Run();
         }
     }
 }
