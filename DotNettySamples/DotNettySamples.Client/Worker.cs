@@ -94,31 +94,37 @@ namespace DotNettySamples.Client
         public override void HandlerAdded(IChannelHandlerContext context)
         {
             base.HandlerAdded(context);
+            m_logger.LogInformation("handler added");
         }
 
         public override void HandlerRemoved(IChannelHandlerContext context)
         {
             base.HandlerRemoved(context);
+            m_logger.LogInformation("handler removed");
         }
 
         public override void ChannelRegistered(IChannelHandlerContext context)
         {
             base.ChannelRegistered(context);
+            m_logger.LogInformation("channel registered");
         }
 
         public override void ChannelUnregistered(IChannelHandlerContext context)
         {
             base.ChannelUnregistered(context);
+            m_logger.LogInformation("channel unregistered");
         }
 
         public override void ChannelActive(IChannelHandlerContext context)
         {
             base.ChannelActive(context);
+            m_logger.LogInformation("channel actived");
         }
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             base.ChannelInactive(context);
+            m_logger.LogWarning("连接断开");
             m_worker.StartAsync(m_cancellationToken);
         }
 
