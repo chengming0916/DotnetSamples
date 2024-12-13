@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>dotnet-DotnettySamples.Server.Net5-68673284-7059-4244-B12F-688BD24BD9D2</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetty.Handlers" Version="0.7.6" />
     <PackageReference Include="DotNetty.Transport" Version="0.7.6" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.4" />
   </ItemGroup>
 
   <ItemGroup>

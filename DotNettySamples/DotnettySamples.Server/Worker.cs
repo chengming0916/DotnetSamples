@@ -1,3 +1,4 @@
+using DotNetty.Handlers.Timeout;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
@@ -5,28 +6,35 @@ using DotNettySamples.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DotnettySamples.Server.Net5
+namespace DotnettySamples.Server
 {
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> m_logger;
-        private readonly IConfiguration m_configuration;
+        private readonly Config m_config;
         private IEventLoopGroup m_bossGroup = new MultithreadEventLoopGroup(1);
         private IEventLoopGroup m_udpWorkderGroup = new MultithreadEventLoopGroup();
         private IEventLoopGroup m_tcpWorkderGroup = new MultithreadEventLoopGroup();
         private IChannel m_udpChannel;
         private IChannel m_tcpChannel;
-        int m_port;
 
-        public Worker(ILogger<Worker> logger, IConfiguration configuration)
+        public Worker(ILogger<Worker> logger, IOptions<Config> options)
         {
-            m_logger = logger;
-            m_configuration = configuration;
-            m_port = m_configuration.GetValue<int>("Port");
+            m_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            m_config = options.Value;
+
+        }
+
+        public override async Task StartAsync(CancellationToken cancellationToken)
+        {
+            //await RunUpdServer();
+
+            await RunTcpServer();
         }
 
         //protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -38,6 +46,7 @@ namespace DotnettySamples.Server.Net5
         //    }
         //}
 
+
         public override async Task StopAsync(CancellationToken cancellationToken)
         {
             await m_tcpChannel.CloseAsync();
@@ -47,13 +56,41 @@ namespace DotnettySamples.Server.Net5
                 m_tcpWorkderGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
                 m_bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1))
                 );
-
-            //return base.StopAsync(cancellationToken);
         }
 
-        public override Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            return base.StartAsync(cancellationToken);
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                // 程序升级
+
+                // 节点登录/注册
+
+                // 定时心跳
+
+                // 看门狗
+
+                // 配置更新
+
+                Thread.Sleep(TimeSpan.FromSeconds(30));
+            }
+        }
+
+        private async Task RunTcpServer()
+        {
+            var tcpBootstrap = new ServerBootstrap();
+            tcpBootstrap.Group(m_bossGroup, m_tcpWorkderGroup);
+            tcpBootstrap.Channel<TcpServerSocketChannel>()
+                .ChildOption(ChannelOption.SoKeepalive, true);
+            tcpBootstrap.ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
+            {
+                //channel.Pipeline.AddLast("timeout", new IdleStateHandler(5, 5, 5)); // 连接空闲时间太长时触发UserEventTrigger
+                channel.Pipeline.AddLast("read-timeout", new ReadTimeoutHandler(50));  // 读空闲太长时间触发异常
+                channel.Pipeline.AddLast("write-timeout", new WriteTimeoutHandler(5));// 写空闲太长时间触发异常
+                channel.Pipeline.AddLast("TCP", new TcpServerHandler());
+            }));
+
+            m_tcpChannel = await tcpBootstrap.BindAsync(m_config.Port);
         }
 
         private async Task RunUpdServer()
@@ -69,29 +106,7 @@ namespace DotnettySamples.Server.Net5
                     channel.Pipeline.AddLast("UDP", new UdpServerHandler());
                 }));
 
-            m_udpChannel = await udpBootstrap.BindAsync(m_port);
-        }
-
-        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
-        {
-            await RunUpdServer();
-
-            await RunTcpServer();
-        }
-
-        private async Task RunTcpServer()
-        {
-            var tcpBootstrap = new ServerBootstrap();
-            tcpBootstrap.Group(m_bossGroup, m_tcpWorkderGroup);
-            tcpBootstrap.Channel<TcpServerSocketChannel>()
-                .ChildOption(ChannelOption.SoKeepalive, true);
-            tcpBootstrap.ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
-            {
-                IChannelPipeline pipeline = channel.Pipeline;
-                pipeline.AddLast("TCP", new TcpServerHandler());
-            }));
-
-            m_tcpChannel = await tcpBootstrap.BindAsync(m_port);
+            m_udpChannel = await udpBootstrap.BindAsync(m_config.Port);
         }
     }
 }
