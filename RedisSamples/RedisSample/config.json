@@ -1,0 +1,7 @@
+{
+    "Redis":{
+        "Host": "127.0.0.1:6379",
+        "Db": 0,
+        "Password": "passwd"
+    }
+}
