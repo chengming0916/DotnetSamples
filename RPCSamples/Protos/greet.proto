@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "IdentitySample.Protos";
+
+
+service Auth {
+  rpc Login (LoginRequest) returns (LoginReply);
+}
+
+// The request message containing the user's name.
+message LoginRequest {
+  string account = 1;
+  string password = 2;
+}
+
+// The response message containing the greetings.
+message LoginReply {
+  bool success = 1;
+  string token = 2;
+  int32 expires_in = 3;
+  string account = 4;
+  string name = 5;
+  string message = 6;
+}
